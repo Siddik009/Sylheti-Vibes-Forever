@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sylheti Vibes Forever 😂</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#251047,#0b5d4b,#ff7b00);color:#fff;padding:18px}
+.app{max-width:520px;margin:auto}.card{background:#ffffff18;border:1px solid #ffffff2b;backdrop-filter:blur(12px);border-radius:26px;padding:24px;box-shadow:0 18px 50px #0005}
+.logo{text-align:center;font-size:64px}.title{text-align:center;font-size:29px;font-weight:900}.sub{text-align:center;color:#eee;margin:8px 0 22px}
+button{width:100%;padding:15px;border:0;border-radius:15px;font-size:17px;font-weight:800;cursor:pointer;margin:7px 0}.play{background:#20c997;color:#06261f}.light{background:#fff;color:#1c2430}.dark{background:#ffffff16;color:#fff}
+.hidden{display:none}.top{display:flex;justify-content:space-between;gap:8px}.pill{background:#0004;padding:9px 13px;border-radius:20px}.timer{text-align:center;font-size:34px;font-weight:900;margin:15px}.challenge{font-size:23px;line-height:1.4;text-align:center;background:#0003;padding:20px;border-radius:18px}
+.answer{background:#fff;color:#222;text-align:left}.answer:hover{transform:scale(1.01)}.result{text-align:center;font-size:25px}.score{text-align:center;font-size:32px;font-weight:900;margin:12px}.emoji{text-align:center;font-size:70px}
+.shake{animation:shake .3s}@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-5px)}}
+.small{text-align:center;color:#d9e8e3;font-size:13px;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section id="home" class="card">
+<div class="logo">😂</div>
+<div class="title">Sylheti Vibes Forever</div>
+<div class="sub">🤣 কে বেশি পাগল? — Funny Challenge</div>
+<button class="play" onclick="startGame()">🔥 গেম শুরু করো</button>
+<button class="light" onclick="showRules()">📜 গেমের নিয়ম</button>
+<button class="dark" onclick="shareGame()">📤 বন্ধুদের পাঠাও</button>
+<div class="small">Play with friends • Laugh together • No real money</div>
+</section>
+
+<section id="rules" class="card hidden">
+<div class="title">📜 নিয়ম</div>
+<p>😂 প্রতিটি রাউন্ডে একটি মজার Challenge আসবে।</p>
+<p>⏱️ 10 সেকেন্ডের মধ্যে একটি উত্তর বেছে নাও।</p>
+<p>⭐ মজার/সঠিক উত্তর পেলে 10 পয়েন্ট।</p>
+<p>🔥 টানা উত্তর দিলে Bonus পাবে।</p>
+<p>🏆 শেষে তোমার Funny Score দেখা যাবে।</p>
+<button class="play" onclick="startGame()">🎮 খেলি!</button>
+<button class="dark" onclick="show('home')">← Back</button>
+</section>
+
+<section id="game" class="card hidden">
+<div class="top"><span class="pill" id="round">Round 1/8</span><span class="pill">⭐ <span id="score">0</span></span></div>
+<div class="timer" id="timer">10</div>
+<div class="challenge" id="challenge"></div>
+<div id="answers"></div>
+</section>
+
+<section id="result" class="card hidden">
+<div class="emoji" id="resultEmoji">🤣</div>
+<div class="result" id="resultTitle"></div>
+<div class="score" id="finalScore">0</div>
+<div class="sub" id="resultText"></div>
+<button class="play" onclick="startGame()">🔄 আবার খেলো</button>
+<button class="light" onclick="shareResult()">📤 Result Share করো</button>
+<button class="dark" onclick="show('home')">🏠 Home</button>
+</section>
+
+</div>
+
+<script>
+const challenges=[
+["তোমার মুরগি এসে বলল, “ভাই আমাকে চাকরি দাও!” তুমি কী করবে?",["CEO বানাবো 🐔","বিরিয়ানি খাওয়াবো 🍗","দৌড় দেবো 🏃","আগে CV চাইবো 😂"],3],
+["বন্ধু বলল সে আজ থেকে ডায়েট করবে। ৫ মিনিট পর কী করবে?",["সালাদ খাবে 🥗","বিরিয়ানি অর্ডার করবে 😂","ঘুমাবে 😴","পানি খাবে 💧"],1],
+["রাতে ঘুমানোর সময় হঠাৎ দরজায় টোকা। প্রথম কাজ?",["দরজা খুলবো","আয়াত পড়বো 🤲","বন্ধুকে ফোন 📱","কম্বলের নিচে লুকাবো 😂"],3],
+["তোমার বন্ধু ১ ঘণ্টা ধরে বলছে ‘আমি আসছি’। আসলে সে কোথায়?",["রাস্তায়","ঘুমাচ্ছে 😴","গোসল করছে","এখনও বাসায় 😂"],3],
+["পকেটে টাকা নেই, কিন্তু বন্ধু বলছে ‘চলো খেতে যাই’। কী করবে?",["চুপচাপ যাবো 😂","ATM খুঁজবো","বাসায় যাবো","বন্ধুকে বলবো তুই দে"],0],
+["একজন বলল তুমি খুব শান্ত মানুষ। তোমার প্রতিক্রিয়া?",["ধন্যবাদ 😊","হাসবো 😂","মিথ্যা কথা!","আমি? শান্ত?!"],3],
+["তোমার ফোনের Battery 1%। চার্জার নেই।",["বিদায় ফোন 😭","দৌড়ে চার্জার খুঁজবো","বন্ধুর ফোন নেবো","Battery-কে বুঝাবো 😂"],3],
+["বন্ধু বলল ‘একটা গোপন কথা বলি?’ তারপর ৩০ মিনিট কথা বলল। তুমি?",["চা খাবো ☕","ঘুমাবো 😴","আরও শুনবো 😂","চুপ কর বলবো"],2]
+];
+
+let q=0,score=0,time=10,timer=null,locked=false;
+
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden")}
+function showRules(){show("rules")}
+function startGame(){q=0;score=0;show("game");next()}
+function next(){
+ if(q>=challenges.length){finish();return}
+ locked=false;const c=challenges[q];
+ document.getElementById("round").textContent=`Round ${q+1}/${challenges.length}`;
+ document.getElementById("score").textContent=score;
+ document.getElementById("challenge").textContent=c[0];
+ const box=document.getElementById("answers");box.innerHTML="";
+ c[1].forEach((a,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=a;b.onclick=()=>answer(i,b);box.appendChild(b)});
+ clearInterval(timer);time=10;document.getElementById("timer").textContent=time;
+ timer=setInterval(()=>{time--;document.getElementById("timer").textContent=time;if(time<=0){clearInterval(timer);timeout()}},1000)
+}
+function answer(i,b){
+ if(locked)return;locked=true;clearInterval(timer);
+ const correct=challenges[q][2];
+ document.querySelectorAll(".answer").forEach(x=>x.disabled=true);
+ if(i===correct){score+=10;b.style.background="#b7f7d2";b.textContent="🎉 "+b.textContent}
+ else{b.style.background="#ffd0d0";document.getElementById("challenge").classList.add("shake")}
+ setTimeout(()=>{q++;next()},700)
+}
+function timeout(){
+ if(locked)return;locked=true;
+ document.getElementById("game").classList.add("shake");
+ document.querySelectorAll(".answer").forEach(x=>x.disabled=true);
+ setTimeout(()=>{q++;next()},700)
+}
+function finish(){
+ clearInterval(timer);document.getElementById("finalScore").textContent=score+" Points";
+ let title,emoji,text;
+ if(score>=70){emoji="👑";title="তুমি Group-এর Comedy King/Queen!";text="তোমার হাসির Power ভয়ংকর! 😂"}
+ else if(score>=40){emoji="🤣";title="তুমি ভালোই পাগল!";text="আর একটু Practice করলে Legend! 🔥"}
+ else{emoji="😂";title="আজকে একটু শান্ত ছিলে!";text="পরেরবার আরও পাগলামি করো! 😜"}
+ document.getElementById("resultEmoji").textContent=emoji;
+ document.getElementById("resultTitle").textContent=title;
+ document.getElementById("resultText").textContent=text;
+ show("result")
+}
+function shareGame(){
+ const text="😂 Sylheti Vibes Forever — কে বেশি পাগল? আমার সাথে Funny Challenge খেলো!";
+ if(navigator.share) navigator.share({title:"Sylheti Vibes Forever",text:text});
+ else{navigator.clipboard?.writeText(text);alert("Share text copied!")}
+}
+function shareResult(){
+ const text=`😂 আমি Sylheti Vibes Forever Funny Challenge-এ ${score} Points পেয়েছি! তুমি আমাকে হারাতে পারবে?`;
+ if(navigator.share) navigator.share({title:"My Funny Score",text:text});
+ else{navigator.clipboard?.writeText(text);alert("Result copied!")}
+}
+</script>
+</body>
+</html>
