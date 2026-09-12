@@ -7,486 +7,614 @@
 <title>💍 ভবিষ্যৎ বউ কে?</title>
 
 <style>
-
-/* =========================
-   BASIC
-========================= */
-
 *{
-  box-sizing:border-box;
-}
-
-html,
-body{
-  margin:0;
-  padding:0;
-  width:100%;
-  min-height:100%;
+    box-sizing:border-box;
 }
 
 body{
-  min-height:100vh;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff7195 0%,
-      #ff4f9a 45%,
-      #8d4de8 100%
-    );
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  overflow-x:hidden;
+    margin:0;
+    min-height:100vh;
+    font-family:Arial, "Noto Sans Bengali", sans-serif;
+    background:linear-gradient(135deg,#ff7195,#ff4d9d,#934de8);
+    display:flex;
+    justify-content:center;
+    overflow-x:hidden;
 }
-
-
-/* =========================
-   BACKGROUND TEXT
-========================= */
 
 .bgText{
-  position:fixed;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(-18deg);
-
-  font-size:48px;
-  font-weight:900;
-
-  color:rgba(255,255,255,0.13);
-
-  letter-spacing:2px;
-
-  white-space:nowrap;
-
-  pointer-events:none;
-  user-select:none;
-
-  z-index:0;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(-18deg);
+    font-size:46px;
+    font-weight:bold;
+    color:rgba(255,255,255,.12);
+    white-space:nowrap;
+    z-index:0;
+    pointer-events:none;
 }
-
-
-/* =========================
-   GAME
-========================= */
 
 .game{
-  position:relative;
-  z-index:2;
-
-  width:100%;
-  max-width:520px;
-
-  text-align:center;
-
-  padding:
-    20px
-    10px
-    35px;
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:520px;
+    text-align:center;
+    padding:25px 10px 40px;
 }
 
-
-/* =========================
-   TITLE
-========================= */
-
 h1{
-  color:white;
-
-  font-size:32px;
-
-  margin:
-    5px
-    0
-    8px;
-
-  text-shadow:
-    2px 3px 4px #a52b62;
+    margin:5px 0 10px;
+    color:white;
+    font-size:32px;
+    text-shadow:2px 3px 4px rgba(80,0,40,.5);
 }
 
 .subtitle{
-  color:white;
-
-  font-size:18px;
-
-  margin-bottom:20px;
-
-  text-shadow:
-    1px 2px 3px rgba(0,0,0,.25);
+    color:white;
+    font-size:18px;
+    margin-bottom:18px;
 }
 
-
-/* =========================
-   WHEEL AREA
-========================= */
+/* Wheel */
 
 .wheelArea{
-
-  position:relative;
-
-  width:min(94vw,420px);
-
-  aspect-ratio:1;
-
-  margin:auto;
+    position:relative;
+    width:min(94vw,420px);
+    height:min(94vw,420px);
+    margin:auto;
 }
-
-
-/* =========================
-   CANVAS
-========================= */
 
 #wheel{
-
-  width:100%;
-  height:100%;
-
-  display:block;
-
-  filter:
-    drop-shadow(
-      0 8px 8px
-      rgba(0,0,0,.30)
-    );
+    width:100%;
+    height:100%;
+    display:block;
 }
 
-
-/* =========================
-   POINTER
-========================= */
+/* Pointer */
 
 .pointer{
-
-  position:absolute;
-
-  z-index:10;
-
-  top:-4px;
-
-  left:50%;
-
-  transform:
-    translateX(-50%);
-
-  width:0;
-  height:0;
-
-  border-left:
-    23px solid transparent;
-
-  border-right:
-    23px solid transparent;
-
-  border-top:
-    52px solid #222;
+    position:absolute;
+    top:-2px;
+    left:50%;
+    transform:translateX(-50%);
+    width:0;
+    height:0;
+    border-left:25px solid transparent;
+    border-right:25px solid transparent;
+    border-top:55px solid #222;
+    z-index:20;
 }
 
-
-/* Pointer red circle */
-
-.pointer:after{
-
-  content:"";
-
-  position:absolute;
-
-  width:34px;
-  height:34px;
-
-  border-radius:50%;
-
-  background:#ff1760;
-
-  border:5px solid white;
-
-  left:-17px;
-
-  top:-48px;
+.pointerCircle{
+    position:absolute;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ff1760;
+    border:5px solid white;
+    left:50%;
+    top:7px;
+    transform:translateX(-50%);
+    z-index:21;
 }
 
+/* Button */
 
-/* =========================
-   SPIN BUTTON
-========================= */
-
-.spinBtn{
-
-  margin-top:25px;
-
-  width:270px;
-
-  max-width:80%;
-
-  padding:
-    17px
-    25px;
-
-  border:0;
-
-  border-radius:50px;
-
-  background:#222;
-
-  color:white;
-
-  font-size:24px;
-
-  font-weight:bold;
-
-  box-shadow:
-    0 7px 0 #111;
-
-  cursor:pointer;
-
-  transition:
-    transform .1s;
+#spinBtn{
+    margin-top:28px;
+    width:275px;
+    max-width:85%;
+    padding:17px;
+    border:0;
+    border-radius:50px;
+    background:#222;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    box-shadow:0 7px 0 #111;
+    cursor:pointer;
 }
 
-.spinBtn:active{
-
-  transform:
-    translateY(5px);
-
-  box-shadow:
-    0 2px 0 #111;
+#spinBtn:active{
+    transform:translateY(5px);
+    box-shadow:0 2px 0 #111;
 }
 
-.spinBtn:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
+#spinBtn:disabled{
+    opacity:.6;
 }
 
-
-/* =========================
-   RESULT
-========================= */
+/* Result */
 
 .result{
-
-  margin:
-    25px
-    auto
-    0;
-
-  width:92%;
-
-  min-height:90px;
-
-  background:white;
-
-  border-radius:22px;
-
-  padding:
-    18px
-    10px;
-
-  font-size:22px;
-
-  font-weight:bold;
-
-  color:#222;
-
-  box-shadow:
-    0 5px 15px
-    rgba(0,0,0,.25);
+    width:92%;
+    min-height:90px;
+    margin:28px auto 0;
+    background:white;
+    border-radius:22px;
+    padding:18px 10px;
+    color:#222;
+    font-size:22px;
+    font-weight:bold;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
 }
 
-
-/* =========================
-   MOBILE
-========================= */
+/* Mobile */
 
 @media(max-width:400px){
 
-  h1{
-    font-size:28px;
-  }
+    h1{
+        font-size:28px;
+    }
 
-  .subtitle{
-    font-size:16px;
-  }
+    .subtitle{
+        font-size:16px;
+    }
 
-  .bgText{
-    font-size:34px;
-  }
+    .bgText{
+        font-size:34px;
+    }
 
-  .spinBtn{
-    font-size:21px;
-  }
+    #spinBtn{
+        font-size:21px;
+    }
 
-  .result{
-    font-size:20px;
-  }
-
+    .result{
+        font-size:20px;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     BACKGROUND TEXT
-========================= -->
-
 <div class="bgText">
-  Sylheti Vibes Forever
+    Sylheti Vibes Forever
 </div>
-
-
-<!-- =========================
-     GAME
-========================= -->
 
 <div class="game">
 
+    <h1>💍 ভবিষ্যৎ বউ কে?</h1>
 
-  <h1>
-    💍 ভবিষ্যৎ বউ কে?
-  </h1>
+    <div class="subtitle">
+        মজার ছলে Wheel ঘুরিয়ে দেখো! 😍
+    </div>
 
+    <div class="wheelArea">
 
-  <div class="subtitle">
-    মজার ছলে Wheel ঘুরিয়ে দেখো! 😍
-  </div>
+        <div class="pointer"></div>
+        <div class="pointerCircle"></div>
 
+        <canvas id="wheel" width="700" height="700"></canvas>
 
-  <!-- WHEEL -->
+    </div>
 
-  <div class="wheelArea">
+    <button id="spinBtn">
+        🎡 SPIN
+    </button>
 
-    <div class="pointer"></div>
-
-    <canvas
-      id="wheel"
-      width="700"
-      height="700">
-    </canvas>
-
-  </div>
-
-
-  <!-- SPIN BUTTON -->
-
-  <button
-    class="spinBtn"
-    id="spinBtn">
-
-    🎡 SPIN
-
-  </button>
-
-
-  <!-- RESULT -->
-
-  <div
-    class="result"
-    id="result">
-
-    ❤️ Spin করো, নাম দেখো!
-
-  </div>
-
+    <div class="result" id="result">
+        ❤️ Spin করো, নাম দেখো!
+    </div>
 
 </div>
-
 
 
 <script>
 
-/* ==========================================
-   WHEEL SETUP
-========================================== */
-
-const canvas =
-  document.getElementById("wheel");
-
-const ctx =
-  canvas.getContext("2d");
-
-const button =
-  document.getElementById("spinBtn");
-
-const result =
-  document.getElementById("result");
-
-
-/* ==========================================
-   ১০টি নাম
-========================================== */
+/* =========================
+   নামগুলো
+========================= */
 
 const names = [
-
-  "সুমাইয়া",
-  "মিম",
-  "সাদিয়া",
-  "নুসরাত",
-  "তানজিলা",
-  "জান্নাত",
-  "ফারিয়া",
-  "মাহি",
-  "আয়েশা",
-  "নিশাত"
-
+    "সুমাইয়া",
+    "মিম",
+    "সাদিয়া",
+    "নুসরাত",
+    "তানজিলা",
+    "জান্নাত",
+    "ফারিয়া",
+    "মাহি",
+    "আয়েশা",
+    "নিশাত"
 ];
 
 
-/* ==========================================
-   WHEEL COLORS
-========================================== */
+/* =========================
+   Wheel Color
+========================= */
 
 const colors = [
-
-  "#ff4d5e",
-  "#ffc83d",
-  "#78c91d",
-  "#1688c9",
-  "#674895",
-  "#ff914d",
-  "#f04cae",
-  "#00bfae",
-  "#7a4dcc",
-  "#fff45c"
-
+    "#ff4d5e",
+    "#ffc83d",
+    "#78c91d",
+    "#1688c9",
+    "#674895",
+    "#ff914d",
+    "#f04cae",
+    "#00bfae",
+    "#7a4dcc",
+    "#fff45c"
 ];
 
 
-const total =
-  names.length;
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
 
+const button = document.getElementById("spinBtn");
+const result = document.getElementById("result");
 
-/*
-   360 degree / 10
-   = 36 degree
-*/
+const total = names.length;
 
-const slice =
-  (Math.PI * 2) / total;
-
-
-/* Wheel rotation */
+const slice = (Math.PI * 2) / total;
 
 let rotation = 0;
-
-
-/* Spin lock */
 
 let spinning = false;
 
 
+/* =========================
+   Wheel আঁকা
+========================= */
 
-/* ==========================================
-   DRAW WHEEL
-========================================== */
+function drawWheel(){
+
+    ctx.clearRect(0,0,700,700);
+
+    ctx.save();
+
+    ctx.translate(350,350);
+
+    ctx.rotate(rotation);
+
+
+    for(let i=0; i<total; i++){
+
+        const start =
+            -Math.PI / 2 + i * slice;
+
+        const end =
+            start + slice;
+
+
+        /* Segment */
+
+        ctx.beginPath();
+
+        ctx.moveTo(0,0);
+
+        ctx.arc(
+            0,
+            0,
+            315,
+            start,
+            end
+        );
+
+        ctx.closePath();
+
+        ctx.fillStyle = colors[i];
+
+        ctx.fill();
+
+
+        /* Divider */
+
+        ctx.strokeStyle = "#ffffff";
+
+        ctx.lineWidth = 5;
+
+        ctx.stroke();
+
+
+        /* =====================
+           নাম
+        ===================== */
+
+        const middle =
+            start + slice / 2;
+
+        ctx.save();
+
+        ctx.rotate(middle);
+
+        /*
+          নাম Wheel-এর ভিতরে
+        */
+
+        ctx.translate(205,0);
+
+        /*
+          লেখা ঘোরানো
+        */
+
+        ctx.rotate(Math.PI / 2);
+
+        ctx.textAlign = "center";
+
+        ctx.textBaseline = "middle";
+
+        ctx.font =
+            'bold 31px "Noto Sans Bengali", Arial';
+
+        /* Shadow */
+
+        ctx.lineWidth = 7;
+
+        ctx.strokeStyle =
+            "rgba(0,0,0,.25)";
+
+        ctx.strokeText(
+            names[i],
+            0,
+            0
+        );
+
+        /* Text */
+
+        ctx.fillStyle = "white";
+
+        ctx.fillText(
+            names[i],
+            0,
+            0
+        );
+
+        ctx.restore();
+    }
+
+
+    ctx.restore();
+
+
+    /* =====================
+       Outer Border
+    ===================== */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        350,
+        350,
+        315,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.strokeStyle = "white";
+
+    ctx.lineWidth = 15;
+
+    ctx.stroke();
+
+
+    /* =====================
+       Center
+    ===================== */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        350,
+        350,
+        67,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle = "white";
+
+    ctx.fill();
+
+    ctx.strokeStyle = "#222";
+
+    ctx.lineWidth = 11;
+
+    ctx.stroke();
+
+
+    /* Heart */
+
+    ctx.font = "45px Arial";
+
+    ctx.textAlign = "center";
+
+    ctx.textBaseline = "middle";
+
+    ctx.fillStyle = "#ff1760";
+
+    ctx.fillText(
+        "♥",
+        350,
+        350
+    );
+}
+
+
+/* =========================
+   প্রথমে Wheel দেখাও
+========================= */
+
+drawWheel();
+
+
+/* =========================
+   SPIN
+========================= */
+
+button.addEventListener("click", function(){
+
+    if(spinning){
+        return;
+    }
+
+    spinning = true;
+
+    button.disabled = true;
+
+    result.innerHTML =
+        "🎡 Wheel ঘুরছে... 😍";
+
+
+    /*
+      প্রথমেই Winner নির্বাচন
+    */
+
+    const winner =
+        Math.floor(
+            Math.random() * total
+        );
+
+
+    /*
+      Winner-এর মাঝখানের Angle
+    */
+
+    const winnerAngle =
+        -Math.PI / 2 +
+        winner * slice +
+        slice / 2;
+
+
+    /*
+      Pointer-এর জায়গা
+      -90 degree
+    */
+
+    const pointerAngle =
+        -Math.PI / 2;
+
+
+    /*
+      Winner-কে Pointer-এর নিচে
+      আনার জন্য Rotation
+    */
+
+    const finalPosition =
+        pointerAngle -
+        winnerAngle;
+
+
+    /*
+      7 বার সম্পূর্ণ ঘুরবে
+    */
+
+    const extraSpins =
+        7 * Math.PI * 2;
+
+
+    /*
+      Final rotation
+    */
+
+    const target =
+        rotation +
+        extraSpins +
+        normalizeAngle(
+            finalPosition -
+            rotation
+        );
+
+
+    const start =
+        rotation;
+
+    const duration =
+        5000;
+
+    const startTime =
+        performance.now();
+
+
+    /* =========================
+       Animation
+    ========================= */
+
+    function animate(now){
+
+        let progress =
+            (now - startTime) /
+            duration;
+
+
+        if(progress > 1){
+            progress = 1;
+        }
+
+
+        /*
+          Smooth slow down
+        */
+
+        const ease =
+            1 -
+            Math.pow(
+                1 - progress,
+                4
+            );
+
+
+        rotation =
+            start +
+            (target - start) *
+            ease;
+
+
+        drawWheel();
+
+
+        if(progress < 1){
+
+            requestAnimationFrame(
+                animate
+            );
+
+        }else{
+
+            /*
+              একই Winner-এর নাম Result-এ
+            */
+
+            result.innerHTML =
+                "💍 ভবিষ্যৎ বউয়ের নাম:<br><br>" +
+                "❤️ " +
+                names[winner] +
+                " ❤️";
+
+
+            spinning = false;
+
+            button.disabled = false;
+        }
+    }
+
+
+    requestAnimationFrame(animate);
+
+});
+
+
+/* =========================
+   Angle ঠিক করা
+========================= */
+
+function normalizeAngle(angle){
+
+    const full =
+        Math.PI * 2;
+
+    angle =
+        angle % full;
+
+    if(angle < 0){
+        angle += full;
+    }
+
+    return angle;
+}
+
+</script>
+
+</body>
+</html>
