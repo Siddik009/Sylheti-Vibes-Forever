@@ -4,161 +4,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>💍 Future Wife Spin</title>
+<title>ভবিষ্যৎ বউ কে?</title>
 
 <style>
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 body{
+  margin:0;
   min-height:100vh;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:linear-gradient(145deg,#ff7195,#ff4f9a,#8d4de8);
   display:flex;
   justify-content:center;
   align-items:center;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3,#8e44ad);
+  overflow-x:hidden;
 }
 
 .game{
   width:100%;
-  max-width:500px;
+  max-width:520px;
   text-align:center;
-  padding:20px;
+  padding:20px 12px 35px;
 }
 
 h1{
   color:white;
-  font-size:30px;
-  text-shadow:2px 2px 5px #555;
-  margin-bottom:8px;
+  font-size:32px;
+  margin:8px 0;
+  text-shadow:2px 3px 4px #9b2862;
 }
 
 .subtitle{
   color:white;
-  font-size:17px;
-  margin-bottom:20px;
+  font-size:18px;
+  margin-bottom:18px;
 }
 
-.wheelBox{
-  width:350px;
-  height:350px;
-  max-width:90vw;
-  max-height:90vw;
-  margin:auto;
+.wheelArea{
   position:relative;
+  width:min(94vw,420px);
+  aspect-ratio:1;
+  margin:auto;
 }
 
-.wheel{
+canvas{
   width:100%;
   height:100%;
-  border-radius:50%;
-  border:9px solid white;
-  box-shadow:0 8px 25px rgba(0,0,0,.4);
-
-  background:conic-gradient(
-    #ff595e 0deg 36deg,
-    #ffca3a 36deg 72deg,
-    #8ac926 72deg 108deg,
-    #1982c4 108deg 144deg,
-    #6a4c93 144deg 180deg,
-    #ff924c 180deg 216deg,
-    #ff66c4 216deg 252deg,
-    #00c9a7 252deg 288deg,
-    #845ec2 288deg 324deg,
-    #f9f871 324deg 360deg
-  );
-
-  transition:transform 5s cubic-bezier(.15,.8,.2,1);
-  position:relative;
+  display:block;
+  filter:drop-shadow(0 8px 8px rgba(0,0,0,.3));
 }
-
-.name{
-  position:absolute;
-  left:25%;
-  top:25%;
-  width:50%;
-  height:50%;
-  transform-origin:50% 100%;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding-top:8px;
-  font-size:16px;
-  font-weight:bold;
-  color:#111;
-}
-
-.n1{transform:rotate(18deg) translateY(-125px);}
-.n2{transform:rotate(54deg) translateY(-125px);}
-.n3{transform:rotate(90deg) translateY(-125px);}
-.n4{transform:rotate(126deg) translateY(-125px);}
-.n5{transform:rotate(162deg) translateY(-125px);}
-.n6{transform:rotate(198deg) translateY(-125px);}
-.n7{transform:rotate(234deg) translateY(-125px);}
-.n8{transform:rotate(270deg) translateY(-125px);}
-.n9{transform:rotate(306deg) translateY(-125px);}
-.n10{transform:rotate(342deg) translateY(-125px);}
 
 .pointer{
   position:absolute;
-  z-index:10;
-  top:-18px;
+  top:-3px;
   left:50%;
   transform:translateX(-50%);
   width:0;
   height:0;
-  border-left:18px solid transparent;
-  border-right:18px solid transparent;
-  border-top:45px solid #222;
-}
-
-.center{
-  position:absolute;
+  border-left:25px solid transparent;
+  border-right:25px solid transparent;
+  border-top:58px solid #222;
   z-index:5;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background:white;
-  border:6px solid #222;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
 }
 
-button{
+.pointer:after{
+  content:"";
+  position:absolute;
+  left:-17px;
+  top:-55px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#ff174f;
+  border:5px solid white;
+}
+
+.spinBtn{
   margin-top:25px;
-  padding:15px 50px;
+  width:270px;
+  max-width:80%;
+  padding:17px 25px;
   border:0;
   border-radius:50px;
   background:#222;
   color:white;
-  font-size:21px;
+  font-size:24px;
   font-weight:bold;
+  box-shadow:0 7px 0 #111;
   cursor:pointer;
-  box-shadow:0 6px 0 #111;
 }
 
-button:active{
+.spinBtn:active{
   transform:translateY(5px);
-  box-shadow:0 1px 0 #111;
+  box-shadow:0 2px 0 #111;
 }
 
-button:disabled{
+.spinBtn:disabled{
   opacity:.6;
+  cursor:not-allowed;
 }
 
-#result{
-  margin-top:20px;
+.result{
+  margin:25px auto 0;
+  width:92%;
+  min-height:70px;
   background:white;
-  border-radius:20px;
-  padding:16px;
-  min-height:58px;
-  font-size:21px;
+  border-radius:22px;
+  padding:17px;
+  font-size:22px;
   font-weight:bold;
-  box-shadow:0 5px 15px rgba(0,0,0,.3);
+  box-shadow:0 5px 15px rgba(0,0,0,.25);
 }
 
 </style>
@@ -168,99 +125,276 @@ button:disabled{
 
 <div class="game">
 
-<h1>💍 ভবিষ্যৎ বউ কে?</h1>
+  <h1>💍 ভবিষ্যৎ বউ কে?</h1>
 
-<div class="subtitle">
-মজার ছলে Wheel ঘুরিয়ে দেখো 😍
-</div>
+  <div class="subtitle">
+    মজার ছলে Wheel ঘুরিয়ে দেখো! 😍
+  </div>
 
-<div class="wheelBox">
+  <div class="wheelArea">
 
-<div class="pointer"></div>
+    <div class="pointer"></div>
 
-<div class="wheel" id="wheel">
+    <canvas id="wheel" width="700" height="700"></canvas>
 
-<div class="name n1">সুমাইয়া</div>
-<div class="name n2">মিম</div>
-<div class="name n3">সাদিয়া</div>
-<div class="name n4">নুসরাত</div>
-<div class="name n5">তানজিলা</div>
-<div class="name n6">জান্নাত</div>
-<div class="name n7">ফারিয়া</div>
-<div class="name n8">মাহি</div>
-<div class="name n9">আয়েশা</div>
-<div class="name n10">নিশাত</div>
+  </div>
 
-<div class="center"></div>
+  <button class="spinBtn" id="spinBtn">
+    🎡 SPIN
+  </button>
 
-</div>
-</div>
-
-<button id="spinBtn" onclick="spin()">
-🎡 SPIN
-</button>
-
-<div id="result">
-❤️ Spin করো, নাম দেখো!
-</div>
+  <div class="result" id="result">
+    ❤️ Spin করো, নাম দেখো!
+  </div>
 
 </div>
 
 <script>
 
-let rotation = 0;
-let spinning = false;
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
 
-const names = [
-"সুমাইয়া ❤️",
-"মিম 💕",
-"সাদিয়া 😍",
-"নুসরাত 💖",
-"তানজিলা 🥰",
-"জান্নাত 💍",
-"ফারিয়া ❤️",
-"মাহি 😘",
-"আয়েশা 💕",
-"নিশাত 💖"
-];
-
-function spin(){
-
-if(spinning) return;
-
-spinning = true;
-
-const wheel = document.getElementById("wheel");
 const button = document.getElementById("spinBtn");
 const result = document.getElementById("result");
 
-button.disabled = true;
+const names = [
+  "সুমাইয়া",
+  "মিম",
+  "সাদিয়া",
+  "নুসরাত",
+  "তানজিলা",
+  "জান্নাত",
+  "ফারিয়া",
+  "মাহি",
+  "আয়েশা",
+  "নিশাত"
+];
 
-result.innerHTML = "🎡 Wheel ঘুরছে... 😍";
+const colors = [
+  "#ff4d5e",
+  "#ffc83d",
+  "#78c91d",
+  "#1688c9",
+  "#674895",
+  "#ff914d",
+  "#f04cae",
+  "#00bfae",
+  "#7a4dcc",
+  "#fff45c"
+];
 
-const random = Math.floor(Math.random()*360);
+let rotation = 0;
+let spinning = false;
 
-rotation += 360 * 7 + random;
+const center = 350;
+const radius = 315;
+const slice = (Math.PI * 2) / names.length;
 
-wheel.style.transform =
-"rotate("+rotation+"deg)";
 
-setTimeout(function(){
+/* =========================
+   DRAW WHEEL
+========================= */
 
-const finalAngle =
-(360 - (rotation % 360)) % 360;
+function drawWheel(){
 
-const index =
-Math.floor(finalAngle / 36);
+  ctx.clearRect(0,0,700,700);
 
-result.innerHTML =
-"💍 ভবিষ্যৎ বউয়ের নাম: <br><br>❤️ "
-+ names[index];
+  ctx.save();
 
-button.disabled = false;
-spinning = false;
+  ctx.translate(center,center);
+  ctx.rotate(rotation);
 
-},5000);
+  for(let i=0;i<names.length;i++){
+
+    const start = i * slice - Math.PI/2;
+    const end = start + slice;
+
+    // Segment
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    ctx.arc(0,0,radius,start,end);
+    ctx.closePath();
+
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+
+    // White dividing line
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+
+    // Name
+    const middle = start + slice/2;
+
+    ctx.save();
+
+    ctx.rotate(middle);
+
+    ctx.translate(radius * 0.67,0);
+
+    ctx.rotate(Math.PI/2);
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Text shadow
+    ctx.shadowColor = "rgba(0,0,0,.35)";
+    ctx.shadowBlur = 3;
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
+
+    ctx.fillStyle = "white";
+
+    let fontSize = 31;
+
+    // ছোট স্ক্রিনেও নাম যেন ভিতরে থাকে
+    ctx.font = `bold ${fontSize}px Arial, "Noto Sans Bengali", sans-serif`;
+
+    ctx.fillText(names[i],0,0);
+
+    ctx.restore();
+  }
+
+  ctx.restore();
+
+
+  // Outer white border
+  ctx.beginPath();
+  ctx.arc(center,center,radius,0,Math.PI*2);
+
+  ctx.strokeStyle="white";
+  ctx.lineWidth=15;
+  ctx.stroke();
+
+
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(center,center,65,0,Math.PI*2);
+
+  ctx.fillStyle="white";
+  ctx.fill();
+
+  ctx.lineWidth=12;
+  ctx.strokeStyle="#222";
+  ctx.stroke();
+
+
+  // Heart
+  ctx.font="42px Arial";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.fillStyle="#ff1764";
+  ctx.fillText("♥",center,center);
+
+}
+
+
+/* প্রথমবার Wheel দেখাও */
+drawWheel();
+
+
+/* =========================
+   SPIN
+========================= */
+
+button.addEventListener("click",function(){
+
+  if(spinning) return;
+
+  spinning = true;
+  button.disabled = true;
+
+  result.innerHTML = "🎡 Wheel ঘুরছে... 😍";
+
+  // 6-9 বার ঘুরবে
+  const extraSpins =
+    (6 + Math.floor(Math.random()*4)) * Math.PI * 2;
+
+  // Random final position
+  const randomAngle = Math.random() * Math.PI * 2;
+
+  const startRotation = rotation;
+
+  const targetRotation =
+    rotation + extraSpins + randomAngle;
+
+  const duration = 5000;
+
+  const startTime = performance.now();
+
+
+  function animate(time){
+
+    const elapsed = time - startTime;
+
+    let progress = elapsed / duration;
+
+    if(progress > 1) progress = 1;
+
+
+    // Smooth deceleration
+    const ease =
+      1 - Math.pow(1-progress,4);
+
+    rotation =
+      startRotation +
+      (targetRotation-startRotation) * ease;
+
+    drawWheel();
+
+
+    if(progress < 1){
+
+      requestAnimationFrame(animate);
+
+    }else{
+
+      spinning = false;
+      button.disabled = false;
+
+      showWinner();
+
+    }
+
+  }
+
+  requestAnimationFrame(animate);
+
+});
+
+
+/* =========================
+   WINNER
+========================= */
+
+function showWinner(){
+
+  /*
+   Pointer সবসময় উপরে।
+   Wheel-এর কোন নাম pointer-এর নিচে আছে
+   সেটা হিসাব করা হচ্ছে।
+  */
+
+  let normalized =
+    ((-rotation % (Math.PI*2)) + Math.PI*2)
+    % (Math.PI*2);
+
+  // Pointer-এর অবস্থান -90 degree
+  normalized =
+    (normalized + Math.PI/2)
+    % (Math.PI*2);
+
+  let index =
+    Math.floor(normalized / slice);
+
+  if(index < 0) index = 0;
+  if(index >= names.length) index = names.length-1;
+
+  result.innerHTML =
+    "💍 ভবিষ্যৎ বউয়ের নাম:<br><br>" +
+    "❤️ " + names[index] +
+    " ❤️";
 
 }
 
